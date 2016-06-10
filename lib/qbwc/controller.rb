@@ -73,7 +73,7 @@ module QBWC
         qbd_client.user_id = @user_id
       end
       if qbd_client.save
-        qbd_client.client.update_attribute(:integration_software, "qb_desktop")
+        qbd_client.client.update_attributes(integrations: true, integration_software: "qb_desktop")
            
         scheduler_block = ''
         if !QBWC.minutes_to_run.nil?

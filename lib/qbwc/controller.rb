@@ -62,11 +62,15 @@ module QBWC
     def qwc
       # Optional tag
       @username = SecureRandom.urlsafe_base64(24)
+      if !current_user.nil?
+        @user_id = current_user.id
+      end
       qbd_client = QbdClient.find_by(client_id: session[:client_id])
       if qbd_client.nil?
-        qbd_client = QbdClient.new(client_id: session[:client_id], username: @username)
+        qbd_client = QbdClient.new(client_id: session[:client_id], username: @username, user_id: @user_id)
       else
         qbd_client.username = @username
+        qbd_client.user_id = @user_id
       end
       if qbd_client.save
         qbd_client.client.update_attribute(:integration_software, "qb_desktop")

@@ -115,6 +115,7 @@ QWC
       username = params[:strUserName]
       puts "username=======>#{params[:strUserName]}"
       password = params[:strPassword]
+      puts "username=======>#{params[:strPassword]}"
       if !QBWC.authenticator.nil?
         company_file_path = QBWC.authenticator.call(username, password)
       elsif username == QBWC.username && password == QBWC.password

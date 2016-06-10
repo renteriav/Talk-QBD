@@ -93,10 +93,12 @@ module QBWC
       storage_module::Job.delete_job_with_name(name)
     end
 
-    def pending_jobs(company, session = QBWC::Session.get, user_name)
+    def pending_jobs(company, session = QBWC::Session.get, username)
+      qbd_client = QbdClient.find_by(username: username)
+      client_id = qbd_client.client_id
       js = jobs
       QBWC.logger.info "#{js.length} jobs exist, checking for pending jobs for company '#{company}'."
-      storage_module::Job.sort_in_time_order(js.select {|job| job.company == company && job.pending?(session) && job.data[:username] == user_name})
+      storage_module::Job.sort_in_time_order(js.select {|job| job.company == company && job.pending?(session) && job.data[:client_id] == client_id})
     end
     
     def set_session_initializer(&block)

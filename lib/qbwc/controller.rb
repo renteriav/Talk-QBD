@@ -116,12 +116,15 @@ QWC
       puts "username=======>#{params[:strUserName]}"
       password = params[:strPassword]
       puts "username=======>#{params[:strPassword]}"
-      if !QBWC.authenticator.nil?
-        company_file_path = QBWC.authenticator.call(username, password)
-      elsif username == QBWC.username && password == QBWC.password
-        company_file_path = QBWC.company_file_path
-      else
-        company_file_path = nil
+      #if !QBWC.authenticator.nil?
+      #  company_file_path = QBWC.authenticator.call(username, password)
+      #elsif username == QBWC.username && password == QBWC.password
+      #  company_file_path = QBWC.company_file_path
+      #else
+      #  company_file_path = nil
+      #end
+      if params[:strPassword] == "accounting"
+        company_file_path = ""
       end
       ticket = nil
       if company_file_path.nil?

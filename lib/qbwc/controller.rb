@@ -227,7 +227,6 @@ QWC
   
     def import_vendors(username, client_id)
       data = {username: username, action: "import_vendors", client_id: client_id}
-      set_parameters
       request = {
         :vendor_query_rq => {
           :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },

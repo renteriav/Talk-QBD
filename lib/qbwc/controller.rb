@@ -214,26 +214,5 @@ QWC
     def check_client_version
     end
     
-    def import_customers(username, client_id)
-      data = {username: username, action: "import_customers", client_id: client_id}
-      request = {
-        :customer_query_rq => {
-          :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
-          :max_returned => 3000
-        }
-      }
-      QBWC.add_job("import_customers_#{client_id}", true, '', CustomerWorker, request, data)
-    end
-  
-    def import_vendors(username, client_id)
-      data = {username: username, action: "import_vendors", client_id: client_id}
-      request = {
-        :vendor_query_rq => {
-          :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
-          :max_returned => 3000
-        }
-      }
-      QBWC.add_job("import_vendors_#{client_id}", true, '', VendorWorker, request, data)
-    end
   end
 end

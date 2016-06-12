@@ -76,6 +76,7 @@ module QBWC
         qbd_client.client.update_attributes(integrations: true, integration_software: "qbd")
         import_customers(@username, session[:client_id])
         import_vendors(@username, session[:client_id])
+        import_accounts(@username, session[:client_id])
            
         scheduler_block = ''
         if !QBWC.minutes_to_run.nil?

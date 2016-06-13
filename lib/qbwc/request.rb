@@ -9,7 +9,8 @@ class QBWC::Request
     case
     when request.is_a?(Hash)
       request = self.class.wrap_request(request)
-      @request = QBWC.parser.to_qbxml(request, {:validate => true})
+      #@request = QBWC.parser.to_qbxml(request, {:validate => true})
+      @request = QBWC.parser.to_qbxml(request)
     when request.is_a?(String)
       @request = request
     else

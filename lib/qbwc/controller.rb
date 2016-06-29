@@ -74,9 +74,8 @@ module QBWC
       end
       if qbd_client.save
         qbd_client.client.update_attributes(integrations: true, integration_software: "qbd")
-        import_customers(@username, session[:client_id])
-        import_vendors(@username, session[:client_id])
-        import_accounts(@username, session[:client_id])
+        
+        import_all_entities(@username, session[:client_id])
            
         scheduler_block = ''
         if !QBWC.minutes_to_run.nil?
@@ -102,7 +101,7 @@ SB
    #{scheduler_block}
 </QBWCXML>
 QWC
-        send_data qwc, :filename => "#{@filename || Rails.application.class.parent_name}.qwc", :content_type => 'application/x-qwc'
+        send_data qwc, :filename => "#{app_name || Rails.application.class.parent_name}.qwc", :content_type => 'application/x-qwc'
       end
     end
 

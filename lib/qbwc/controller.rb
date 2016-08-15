@@ -72,9 +72,7 @@ module QBWC
         qbd_client.username = @username
         qbd_client.user_id = @user_id
       end
-      if qbd_client.save
-        qbd_client.client.update_attributes(integrations: true, integration_software: "qbd")
-        
+      if qbd_client.save        
         import_all_entities(@username, session[:client_id])
            
         scheduler_block = ''

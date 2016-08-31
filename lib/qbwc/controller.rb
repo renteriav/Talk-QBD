@@ -61,7 +61,7 @@ module QBWC
 
     def qwc
       # Optional tag
-      @username = SecureRandom.urlsafe_base64(24)
+      @username = SecureRandom.uuid
       if !current_user.nil?
         @user_id = current_user.id
       end
